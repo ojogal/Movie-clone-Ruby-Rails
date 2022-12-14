@@ -1,14 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div class="py-4">
+<% if !user_signed_in? %>
+  <div class="card p-3">
+    <h1>What do you think about movie?</h1>
+    <div class="jumbotron">
+      <p>Sign Up or Sign In to add ratings </p>
+      <p><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
+      <p><%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg" %></p>
+    </div>
+  </div>
+<% end %>
 
-<h1>Movies</h1>
-
-<div id="movies">
+<div class="row">
   <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
+    <div class="col-sm-6 col-md-3">
+      <div class="img-thumbnail">
+        <%= link_to (image_tag movie.image.url(:medium), class: 'image col-12'), movie %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New movie", new_movie_path %>
+</div>

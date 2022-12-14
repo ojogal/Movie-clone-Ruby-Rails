@@ -1,11 +1,52 @@
-<p style="color: green"><%= notice %></p>
+<div class="py-4 ">
+<%# <div class="card"> %>
+  <%# <div class="panel-body"> %>
+    <div class="row justify-content-center">
+      <div class="col-md-4 card">
+        <p style="color: green"><%= notice %></p>
+        <%= image_tag @movie.image.url(:medium) %>
 
-<%= image_tag @movie.image.url(:medium) %>
-<%= render @movie %>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><strong>Title:</strong></td>
+                <td><%= @movie.title %></td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td>
+                <td><%= @movie.text %></td>
+              </tr>
+              <tr>
+                <td><strong>Category:</strong></td>
+                <td><%= @movie.category %></td>
+              </tr>
+              <tr>
+                <td><strong>Rating:</strong></td>
 
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
+                  <td><%= @avg_rating %></td>
+                  <td>
+                  <% @movie.rating.to_i.times do  %>
+                    <div class="the-icons">
+                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                    </div>
+                    <span class="glyphicon glyphicon-search"></span>
+                  <% end %>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
+        <div>
+          <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
+          <%= link_to "Back to movies", movies_path %>
+
+          <%= button_to "Destroy this movie", @movie, method: :delete %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

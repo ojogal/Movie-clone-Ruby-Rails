@@ -1,24 +1,28 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ImageMagick (image processor) set up:
 
-Things you may want to cover:
+```
+sudo apt update
+```
 
-* Ruby version
+```
+sudo apt install imagemagick
+```
 
-* System dependencies
+Rails set up:
 
-* Configuration
+```
+bundle install
+```
 
-* Database creation
+```
+rails db:create
+```
 
-* Database initialization
+```
+rails db:migrate
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+rails s -p 4001
+```

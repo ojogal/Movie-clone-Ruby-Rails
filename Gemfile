@@ -77,3 +77,5 @@ end
 gem "devise", "~> 4.8"
 
 gem "paperclip", "~> 6.1"
+
+gem "kaminari", "~> 1.2"

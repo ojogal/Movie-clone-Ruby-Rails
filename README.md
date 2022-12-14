@@ -27,6 +27,8 @@ rails db:migrate
 rails s -p 4001
 ```
 
+If you have error "The asset "application.css" is not present in the asset pipeline." do the following
+
 Add the following to config/environment/production.rb:
 
 ```

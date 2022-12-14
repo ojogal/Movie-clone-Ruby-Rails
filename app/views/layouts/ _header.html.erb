@@ -1,0 +1,46 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+ <div class="container">
+  <a class="navbar-brand"><%= link_to "Movie Reviews", root_path, class: "navbar-brand" %></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <li class="nav-item active">
+          <a><%= link_to "New Movie", new_movie_path, class: "nav-link" %></a>
+        </li>
+        <li class="nav-item">
+          <a><%= link_to "Account", edit_user_registration_path, class: "nav-link" %></a>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></a>
+        </li>
+        <li class="nav-item">
+          <a><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></a>
+        </li>
+      <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Drama</a>
+          <a class="dropdown-item" href="#">Adventure</a>
+          <a class="dropdown-item" href="#">Cartoon</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  </div>
+      <%# <form class="form-inline"> %>
+      <%#= form_tag search_movies_path, method: :get, class: "navbar-form navbar-right", role: "search" do %>
+        <%#= submit_tag "Search", name: nil, class: "btn btn-default" %> 
+        <%#= text_field_tag :search, params[:search], class: "form-control" %>
+        <%# <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> %>
+        <%# <button class="btn btn-sm btn-outline-secondary" type="submit">Search</button> %>
+      <%# end %>
+      <%# </form> %>
+</nav>

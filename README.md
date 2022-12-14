@@ -26,3 +26,14 @@ rails db:migrate
 ```
 rails s -p 4001
 ```
+
+Add the following to config/environment/production.rb:
+
+```
+config.serve_static_files = true
+```
+
+Paste in terminal this:
+```
+rails assets:precompile
+```

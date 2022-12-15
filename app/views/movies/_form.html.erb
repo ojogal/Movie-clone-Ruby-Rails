@@ -11,32 +11,27 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+  <% if current_user.admin_role? %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_field :text %>
-  </div>
-
-  <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.number_field :rating %>
-  </div>
-
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.text_field :category %>
-  </div>
-
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+    <div>
+      <%= form.label :title, style: "display: block" %>
+      <%= form.text_field :title %>
+    </div>
+    <div>
+      <%= form.label :text, style: "display: block" %>
+      <%= form.text_field :text %>
+    </div>
+    <div>
+      <%= form.label :category, style: "display: block" %>
+      <%= form.text_field :category %>
+    </div>
+    <div>
+      <%= form.label :image %>
+      <%= form.file_field :image %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
 <% end %>

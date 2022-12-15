@@ -52,6 +52,13 @@ class MoviesController < ApplicationController
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+
+    # if current_user.basic_role?
+    #   if @movie.update(rating_params)
+    #     format.html { redirect_to movie_url(@movie), notice: "Thank you for your vote!" }
+    #     format.json { render :show, status: :ok, location: @movie }
+    #   end
+    # end
   end
 
   # DELETE /movies/1 or /movies/1.json
@@ -65,6 +72,7 @@ class MoviesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
@@ -73,5 +81,9 @@ class MoviesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def movie_params
       params.require(:movie).permit(:title, :text, :rating, :category, :image, :search)
+    end
+
+    def rating_params
+      params.require(:movie).permit(:rating)
     end
 end

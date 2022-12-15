@@ -43,4 +43,8 @@ If you have error "undefined method `user_url' for #<Devise::RegistrationsContro
 Add this to config/initializers/devise.rb:
 ```
 config.navigational_formats = ['*/*', :html, :turbo_stream]
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 364c6ea (Search field added)

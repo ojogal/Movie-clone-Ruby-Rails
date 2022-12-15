@@ -11,4 +11,13 @@ class Movie < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   paginates_per 8
+
+  scope :filter_by_category, lambda { |keyword|
+    where('lower(category) LIKE ?', "%#{keyword.downcase}%")
+  }
+
+  def self.search(search)
+    movies = search ? Movie.filter_by_category(search) : Movie.all
+    movies
+  end
 end

@@ -22,7 +22,16 @@
           <a><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></a>
         </li>
       <% end %>
-      <li class="nav-item dropdown">
+
+      <div class="py-1 px-2">
+        <%= form_tag movies_path, method: :get do %>
+          <%= text_field_tag :search, params[:search], placeholder: 'Search by category' %>
+          <%= submit_tag 'Search' %>
+        <% end %>
+      </div>
+
+
+      <%# <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Category
         </a>
@@ -31,7 +40,9 @@
           <a class="dropdown-item" href="#">Adventure</a>
           <a class="dropdown-item" href="#">Cartoon</a>
         </div>
-      </li>
+      </li> %>
+
+      
     </ul>
   </div>
   </div>

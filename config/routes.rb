@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   resources :movies do
     get '/page/:page', action: :index, on: :collection
   end
+  
+  namespace :admin do
+    resources :users, only: %i[index show create edit update]
+  end
 
   root "movies#index"
 end

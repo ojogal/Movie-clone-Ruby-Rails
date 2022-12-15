@@ -1,0 +1,25 @@
+<%= form_for [:admin, @user] do |f| %>
+
+  <div>
+    <div class="col-form-label">
+      <%= f.label :email %>
+    </div>
+    <div >
+    <%= f.email_field :email %>
+    </div>
+  </div>
+
+  <div>
+    <div class="col-form-label">
+      <%= f.label :role %>
+    </div>
+    <div >
+    <%= f.text_field :role %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+<% end %>

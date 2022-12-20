@@ -25,30 +25,31 @@
                 <td><strong>Rating:</strong></td>
 
                   <td><%= @avg_rating %></td>
-                  <td>
-                  <% @movie.rating.to_i.times do  %>
-                    <div class="the-icons">
-                        <span class="glyphicon glyphicon-search"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </div>
-                    <span class="glyphicon glyphicon-search"></span>
-                  <% end %>
-                  </td>
+
               </tr>
             </tbody>
           </table>
         </div>
+        <% if current_user %>
+          <% if current_user.admin_role? %>
+            <div>
+              <%= link_to "Edit this movie", edit_movie_path(@movie) %>
 
-        <% if current_user.admin_role? %>
-          <div>
-            <%= link_to "Edit this movie", edit_movie_path(@movie) %>
-            <%= link_to "Back to movies", movies_path %>
-
-            <%= button_to "Destroy this movie", @movie, method: :delete %>
-          </div>
+              <%= button_to "Destroy this movie", @movie, method: :delete %>
+            </div>
+          <% end %>
         <% end %>
+              <%= link_to "Back to movies", movies_path %>                   
+              <%= link_to "Mark a rating", new_movie_review_path(@movie) %>
       </div>
     </div>
   </div>
 </div>
 </div>
+
+<script>
+  $('#star-rating').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
+</script>

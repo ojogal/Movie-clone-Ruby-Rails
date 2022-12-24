@@ -1,10 +1,12 @@
+<% if user_signed_in? && current_user.admin_role? %>
 <tr>
   <th scope="row"><%= user.id %></th>
   <td><%= user.email %></td>
   <td><%= user.role %></td>
   <td><%= user.created_at %></td>
   <td>
-    <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-secondary' %>
-    <%= button_to "Delete", admin_user_path(user), class: 'btn btn-danger', method: :delete %>
+    <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-warning' %>
+    <%= button_to "Delete", admin_user_path(user), class: 'btn btn-warning', method: :delete %>
   </td>
 </tr>
+<% end %>

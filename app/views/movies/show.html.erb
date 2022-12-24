@@ -1,13 +1,12 @@
-<div class="py-4 ">
-<%# <div class="card"> %>
-  <%# <div class="panel-body"> %>
+<%= javascript_include_tag 'jquery.raty.js', "data-turbolinks-track": false %>
+
+<div class="py-4 text-white">
     <div class="row justify-content-center">
-      <div class="col-md-4 card">
-        <p style="color: green"><%= notice %></p>
+      <div class="col-md-4 card bg-dark border-0 text-white" style="color: white !important">
         <%= image_tag @movie.image.url(:medium) %>
 
         <div class="table-responsive">
-          <table class="table">
+          <table class="table text-white">
             <tbody>
               <tr>
                 <td><strong>Title:</strong></td>
@@ -24,7 +23,7 @@
               <tr>
                 <td><strong>Rating:</strong></td>
 
-                  <td><%= @avg_rating %></td>
+                  <td> <%= @avg_rating %> <div class="star-rating" data-score=<%= @avg_rating %>></div></td>
 
               </tr>
             </tbody>
@@ -32,15 +31,15 @@
         </div>
         <% if current_user %>
           <% if current_user.admin_role? %>
-            <div>
-              <%= link_to "Edit this movie", edit_movie_path(@movie) %>
-
-              <%= button_to "Destroy this movie", @movie, method: :delete %>
+            <div class="row justify-content-around mb-2">
+              <%= link_to "Edit this movie", edit_movie_path(@movie), class: "btn btn-warning col-5" %>
+              <div class="col-5 px-0"><%= button_to "Destroy this movie", @movie, method: :delete, class: "btn btn-warning w-100" %></div>
             </div>
           <% end %>
         <% end %>
-              <%= link_to "Back to movies", movies_path %>                   
-              <%= link_to "Mark a rating", new_movie_review_path(@movie) %>
+        <div class="row justify-content-around">
+              <%= link_to "Back to movies", movies_path, class: "btn btn-warning col-5" %>                   
+            </div>
       </div>
     </div>
   </div>
@@ -48,8 +47,11 @@
 </div>
 
 <script>
-  $('#star-rating').raty({
-    path: '/assets/',
-    scoreName: 'review[rating]'
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
   });
 </script>

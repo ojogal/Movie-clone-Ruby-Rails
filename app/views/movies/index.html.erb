@@ -1,31 +1,111 @@
+<%= javascript_include_tag 'jquery.raty.js', "data-turbolinks-track": false %>
 
 <div class="py-4">
-<% if !user_signed_in? %>
-  <div class="card p-3">
-    <h1>What do you think about movie?</h1>
-    <div class="jumbotron">
-      <p>Sign Up or Sign In to add ratings </p>
-      <p><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
-      <p><%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg" %></p>
-    </div>
-  </div>
-<% end %>
-
-<div class="row">
-  <% @movies.each do |movie| %>
-    <div class="col-sm-6 col-md-3">
-      <div class="img-thumbnail" >
-        <%= link_to (image_tag movie.image.url(:medium), class: 'image col-12'), movie %>
-        <div class="py-2">
-          <div class="average-review-rating" data-score=<%= movie.avg_ratings %>><%= movie.avg_ratings %></div>
-        </div>
+  <% if !user_signed_in? %>
+    <div class="card p-3 bg-dark">
+      <h1>What do you think about movie?</h1>
+      <div class="jumbotron">
+        <p>Sign Up or Sign In to add ratings </p>
+        <p><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-warning btn-lg" %></p>
+        <p><%= link_to "Sign In", new_user_session_path, class: "btn btn-warning btn-lg" %></p>
       </div>
     </div>
   <% end %>
-</div>
+
+  <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-sm-6 col-md-3 pb-4">
+        <div class="img-thumbnail bg-dark border-0" >
+          <%= link_to (image_tag movie.image.url(:medium), class: 'image col-12'), movie %>
+          <div class="py-2">
+            <div class="average-review-rating" data-csrf-token=<%= session[:_csrf_token] %> data-score=<%= movie.avg_ratings %> data-movie-id=<%= movie.id %>> <%= movie.avg_ratings %> </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <%= paginate @movies %>
+<style>
+.pagination span.current {
+  background: inherit !important;
+}
+
+.page-link.active, .active > .page-link {
+  color: black;
+  background:  rgb(255, 193, 7);
+}
+
+.pagination {
+  border: none !important;
+}
+
+.pagination a.page-link:hover {
+  background:  rgb(255, 193, 7);
+  color: black;
+}
+
+.pagination a, .pagination span.current, .pagination span.gap {
+    float: left;
+    padding: 0 14px;
+    line-height: 38px;
+    text-decoration: none;
+    background-color: inherit;
+    border: none !important;
+    color:  rgb(255, 193, 7);
+}
+
+.pagination {
+    border-left: 1px solid #ddd;
+    .first{
+        padding : 0;
+        float: none;
+        border: none;
+    }
+    .prev {
+        padding : 0;
+        float: none;
+        border: none;
+    }
+    .page{
+        padding : 0;
+        float: none;
+        border: none;
+    }
+    .next{
+        padding : 0;
+        float: none;
+        border: none;
+    }
+    .last{
+        padding : 0;
+        float: none;
+        border: none;
+    }
+}
+</style>
 <br>
 <br>
 <br>
+
+<script>
+    $('.average-review-rating').raty({
+      path: '/assets/',
+      // readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+      },
+      click: function(stars) {
+        $.ajax(`/movies/${$(this).attr('data-movie-id')}/reviews`, {
+            type: 'post',
+            data: {'review[rating]': stars, authenticity_token: $(this).attr('data-csrf-token')	},
+            success: ({stars}) => {
+              $(this).raty('set', {score: stars}).attr('data-score', stars);
+              $(this).prepend(`<span>${stars}</span>`);
+            }
+          }
+        )
+      }
+  });
+</script>

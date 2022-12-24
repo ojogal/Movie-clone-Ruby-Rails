@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  post '/rate' => 'rater#create', :as => 'rate'
   devise_for :users
-  
+
   resources :movies do
-    get '/page/:page', action: :index, on: :collection
-    resources :reviews, except: %i[:index :show]
-  end
-  
-  namespace :admin do
-    resources :users
-    root "users#index"
+    # get '/page/:page', action: :index, on: :collection
+    resources :reviews, except: %i[index show]
   end
 
-  root "movies#index"
+  namespace :admin do
+    resources :users
+    root 'users#index'
+  end
+
+  root 'movies#index'
 end

@@ -1,3 +1,4 @@
+<div class="d-flex flex-column align-items-center card bg-black border-0 text-white px-2 py-3">
 <%= form_with(model: movie, html: { multipart: true }) do |form| %>
   <% if movie.errors.any? %>
     <div style="color: red">
@@ -14,24 +15,25 @@
   <% if current_user.admin_role? %>
     <%= form.hidden_field :user_id, value: current_user.id %>
 
-    <div>
-      <%= form.label :title, style: "display: block" %>
+    <div class="mb-2 d-flex flex-column">
+      <%= form.label :title, style: "display: block", class: "form-label w-50" %>
       <%= form.text_field :title %>
     </div>
-    <div>
-      <%= form.label :text, style: "display: block" %>
+    <div class="mb-2 d-flex flex-column">
+      <%= form.label :text, style: "display: block", class: "form-label w-50" %>
       <%= form.text_field :text %>
     </div>
-    <div>
-      <%= form.label :category, style: "display: block" %>
+    <div class="mb-2 d-flex flex-column">
+      <%= form.label :category, style: "display: block", class: "form-label w-50" %>
       <%= form.text_field :category %>
     </div>
-    <div>
-      <%= form.label :image %>
-      <%= form.file_field :image %>
+    <div class="mb-2 d-flex flex-column">
+      <%= form.label :image, class: "form-label w-50" %>
+      <%= form.file_field :image, style: "display: block", class: "form-label w-50" %>
     </div>
     <div>
-      <%= form.submit %>
+      <%= form.button :button, type: :submit, class: "p-1 btn btn-warning" %>
     </div>
   <% end %>
 <% end %>
+</div>

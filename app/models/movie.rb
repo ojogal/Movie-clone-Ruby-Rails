@@ -1,11 +1,16 @@
-class Movie < ApplicationRecord
-  belongs_to :user#, optional: true
-  has_many :reviews
-  validates :title, uniqueness: true, presence: :true
-  validates :text, uniqueness: true, presence: :true
+# frozen_string_literal: true
 
-  has_attached_file :image, styles: { medium: "400x600#" }
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/, presence: :true
+class Movie < ApplicationRecord
+  belongs_to :user
+  has_many :reviews
+
+  before_validation :normalize_category, on: :create
+
+  validates :title, uniqueness: true, presence: true
+  validates :text, uniqueness: true, presence: true
+
+  has_attached_file :image, styles: { medium: '400x600#' }
+  validates_attachment_content_type :image, content_type: %r{\Aimage/.*\z}, presence: true
 
   paginates_per 8
 
@@ -13,17 +18,22 @@ class Movie < ApplicationRecord
     where('lower(category) LIKE ?', "%#{keyword.downcase}%")
   }
 
-  def self.search(search)
-    movies = search ? Movie.filter_by_category(search) : Movie.all
-    movies
+  def avg_ratings
+    @avg_ratings = if reviews.blank?
+                     0
+                   else
+                     reviews.average(:rating).round(2).to_f
+                   end
+    @avg_ratings
   end
 
-  def avg_ratings
-    if reviews.blank?
-      @avg_ratings = 0
-    else
-      @avg_ratings = reviews.average(:rating).round(2)
-    end
-    @avg_ratings
+  private
+
+  def normalize_category
+    self.category = category.downcase.titleize
+  end
+
+  def self.search(search)
+    search ? Movie.filter_by_category(search) : Movie.all
   end
 end

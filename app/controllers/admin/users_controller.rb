@@ -15,20 +15,6 @@ module Admin
 
     def edit; end
 
-    def create
-      def create
-        @user = User.new(user_params)
-
-        respond_to do |format|
-          if @user.save
-            format.html { redirect_to admin_users_path(@user), notice: 'User was successfully created.' }
-          else
-            format.html { render :index, status: :unprocessable_entity }
-          end
-        end
-      end
-    end
-
     def update
       respond_to do |format|
         if @user.update(user_params)

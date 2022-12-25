@@ -4,12 +4,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :movies do
-    # get '/page/:page', action: :index, on: :collection
     resources :reviews, except: %i[index show]
   end
 
   namespace :admin do
-    resources :users
+    resources :users, only: %i[index edit update destroy]
     root 'users#index'
   end
 

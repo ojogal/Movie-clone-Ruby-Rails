@@ -30,7 +30,9 @@ class Movie < ApplicationRecord
   private
 
   def normalize_category
-    self.category = category.downcase.titleize
+    if self.category == !nil
+      self.category = category.downcase.titleize
+    end
   end
 
   def self.search(search)

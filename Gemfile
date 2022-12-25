@@ -88,3 +88,13 @@ gem 'rubocop', '~> 1.41'
 gem 'rubocop-rails', '~> 2.17'
 
 gem 'rubocop-performance', '~> 1.15'
+
+gem "rspec-rails", "~> 6.0"
+
+gem "shoulda-matchers", "~> 5.3"
+
+gem "factory_bot_rails", "~> 6.2"
+
+gem "faker", "~> 3.1"
+
+gem "rails-controller-testing", "~> 1.0"

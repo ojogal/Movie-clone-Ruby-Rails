@@ -95,5 +95,5 @@ Rails.application.configure do
 
   config.serve_static_files = true
 
-  config.require_master_key = true
+  config.require_master_key = false
 end

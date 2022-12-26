@@ -71,5 +71,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Devise set up
-  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 4001 }
 end

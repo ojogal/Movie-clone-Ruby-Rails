@@ -99,5 +99,4 @@ Rails.application.configure do
 
   config.require_master_key = false
 
-  config.assets.digest = false
 end

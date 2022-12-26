@@ -98,4 +98,6 @@ Rails.application.configure do
   config.serve_static_assets = true
 
   config.require_master_key = false
+
+  config.assets.digest = false
 end
